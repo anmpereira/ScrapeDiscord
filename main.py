@@ -1,3 +1,6 @@
+""" Copyright (C) 2020  André Pereira
+"""
+
 import requests
 import json
 import datetime
