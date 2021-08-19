@@ -1,16 +1,19 @@
-# This is a sample Python script.
+import requests
+import json
+import secretfiles
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
+def retrieve_messages(channel_id, authorization):
+    headers = {
+        'authorization': authorization
+    }
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    r = requests.get(f'https://discord.com/api/v9/channels/{channel_id}/messages', headers=headers)
+    jsonn = json.loads(r.text)
+    for value in jsonn:
+        print(value['timestamp'], value['content'], '\n')
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    retrieve_messages(secretfiles.channel_id, secretfiles.authorization)
